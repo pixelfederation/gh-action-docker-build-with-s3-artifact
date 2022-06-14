@@ -1,0 +1,61 @@
+name: 'docker build with s3 artifact action'
+description: 'GitHub Action to build docker image with artifact from s3 using buildx'
+author: 'PF'
+inputs:
+  aws_region:
+    required: true
+    description: 'AWS S3 region of artifact'
+    default: 'eu-west-1'
+  image_name:
+    required: true
+    description: 'Name of the image'
+  image_tag:
+    required: true
+    description: 'Tag of the image'
+  buildx_endpoint:
+    required: true
+    description: 'Buildx options'
+    default: 'default'
+  buildx_driver_opts:
+    required: true
+    description: 'Buildx driver-opts'
+    default: 'env.BUILDKIT_STEP_LOG_MAX_SIZE=-1'
+  dockerfile:
+    required: true
+    description: 'Path to Dockerfile'
+  context:
+    required: true
+    description: 'Docker context'
+    default: '.'
+  artifacts_bucket:
+    required: true
+    description: 'Name of S3 bucket with artifact'
+  artifact_name_server:
+    required: true
+    description: 'Path to artifact file on S3 bucket.'
+runs:
+  using: 'composite'
+  steps:
+    - name: Download Artifact - server
+      uses: leroy-merlin-br/action-s3-cache@v1
+      with:
+        action: get
+        aws-region: ${{ inputs.aws_region }}
+        bucket: ${{ inputs.artifacts_bucket }}
+        key: ${{ inputs.artifact_name_server}}
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+      id: buildx
+      with:
+        endpoint: ${{ inputs.buildx_endpoint }}
+        driver-opts: ${{ inputs.buildx_driver_opts }}
+
+    - name: Build and push server image
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        tags: ${{ inputs.image_name }}:${{ inputs.image_tag }}
+        file: ${{ inputs.context }}/${{ inputs.dockerfile }}
+        builder: ${{ inputs.buildx_endpoint }}
+        context: ${{ inputs.context }}
