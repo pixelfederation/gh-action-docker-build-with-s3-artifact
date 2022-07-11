@@ -51,7 +51,6 @@ GitHub Action to build docker image with artifact from s3 using buildx
 | **`aws_region`**           | AWS S3 region of artifact           |             `eu-west-1`             |   **true**   |
 | **`image_name`**           | Name of the image                   |                                     |   **true**   |
 | **`image_tag`**            | Tag of the image                    |                                     |   **true**   |
-| **`buildx_endpoint`**      | Buildx options                      |              `default`              |   **true**   |
 | **`buildx_driver_opts`**   | Buildx driver-opts                  | `env.BUILDKIT_STEP_LOG_MAX_SIZE=-1` |   **true**   |
 | **`dockerfile`**           | Path to Dockerfile                  |                                     |   **true**   |
 | **`context`**              | Docker context                      |                 `.`                 |   **true**   |

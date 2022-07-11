@@ -57,5 +57,5 @@ runs:
         push: true
         tags: ${{ inputs.image_name }}:${{ inputs.image_tag }}
         file: ${{ inputs.context }}/${{ inputs.dockerfile }}
-        builder: ${{ inputs.buildx_endpoint }}
+        builder: ${{ steps.buildx.outputs.name }}
         context: ${{ inputs.context }}
