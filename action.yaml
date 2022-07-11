@@ -12,10 +12,6 @@ inputs:
   image_tag:
     required: true
     description: 'Tag of the image'
-  buildx_endpoint:
-    required: true
-    description: 'Buildx options'
-    default: 'default'
   buildx_driver_opts:
     required: true
     description: 'Buildx driver-opts'
@@ -44,11 +40,15 @@ runs:
         bucket: ${{ inputs.artifacts_bucket }}
         key: ${{ inputs.artifact_name_server}}
 
+    - name: Create docker context
+      run: |
+        docker context create ctx
+
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      uses: docker/setup-buildx-action@v2
       id: buildx
       with:
-        endpoint: ${{ inputs.buildx_endpoint }}
+        endpoint: ctx
         driver-opts: ${{ inputs.buildx_driver_opts }}
 
     - name: Build and push server image
