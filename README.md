@@ -25,10 +25,6 @@ GitHub Action to build docker image with artifact from s3 using buildx
     # Tag of the image
     image_tag: ""
 
-    # Buildx options
-    # Default: default
-    buildx_endpoint: ""
-
     # Buildx driver-opts
     # Default: env.BUILDKIT_STEP_LOG_MAX_SIZE=-1
     buildx_driver_opts: ""
