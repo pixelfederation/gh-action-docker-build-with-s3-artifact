@@ -41,6 +41,7 @@ runs:
         key: ${{ inputs.artifact_name_server}}
 
     - name: Create docker context
+      shell: bash
       run: |
         docker context create ctx
 
