@@ -51,6 +51,9 @@ runs:
       with:
         endpoint: ctx
         driver-opts: ${{ inputs.buildx_driver_opts }}
+        config-inline: |
+          [registry."docker.io"]
+            mirrors = ["docker-registry.kube.shared.pxfd.tech"]
 
     - name: Build and push server image
       uses: docker/build-push-action@v3
