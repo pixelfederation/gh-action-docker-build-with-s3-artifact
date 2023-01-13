@@ -62,4 +62,5 @@ runs:
         tags: ${{ inputs.image_name }}:${{ inputs.image_tag }}
         file: ${{ inputs.context }}/${{ inputs.dockerfile }}
         builder: ${{ steps.buildx.outputs.name }}
+        provenance: false
         context: ${{ inputs.context }}
