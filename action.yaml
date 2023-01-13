@@ -56,7 +56,7 @@ runs:
             mirrors = ["docker-registry.kube.shared.pxfd.tech"]
 
     - name: Build and push server image
-      uses: docker/build-push-action@v3
+      uses: docker/build-push-action@master
       with:
         push: true
         tags: ${{ inputs.image_name }}:${{ inputs.image_tag }}
