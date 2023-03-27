@@ -19,10 +19,10 @@ GitHub Action to build docker image with artifact from s3 using buildx
     # Default: eu-west-1
     aws_region: ""
 
-    # Name of the image (DEPRECATED in v0.1.5)
+    # Name of the image (DEPRECATED in v0.2.0)
     image_name: ""
 
-    # Tag of the image (DEPRECATED in v0.1.5)
+    # Tag of the image (DEPRECATED in v0.2.0)
     # Use 'image_tags' instead
     image_tag: ""
 
@@ -60,8 +60,8 @@ GitHub Action to build docker image with artifact from s3 using buildx
 | **Input**                  | **Description**                          |             **Default**             | **Required** |
 | :------------------------- | :--------------------------------------- | :---------------------------------: | :----------: |
 | **`aws_region`**           | AWS S3 region of artifact                |             `eu-west-1`             |   **true**   |
-| **`image_name`**           | Name of the image (DEPRECATED in v0.1.5) |                                     |   **true**   |
-| **`image_tag`**            | Tag of the image (DEPRECATED in v0.1.5)  |                                     |   **true**   |
+| **`image_name`**           | Name of the image (DEPRECATED in v0.2.0) |                                     |   **true**   |
+| **`image_tag`**            | Tag of the image (DEPRECATED in v0.2.0)  |                                     |   **true**   |
 | **`image_tags`**           | List of tags                             |                                     |   **true**   |
 | **`buildx_driver_opts`**   | Buildx driver-opts                       | `env.BUILDKIT_STEP_LOG_MAX_SIZE=-1` |   **true**   |
 | **`dockerfile`**           | Path to Dockerfile                       |                                     |   **true**   |

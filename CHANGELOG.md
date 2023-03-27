@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.1.5] - 2023-03-24
+## [0.2.0] - 2023-03-24
 
 ### Breaking
 - Merged `image_name` and `image_tag` parameters into a single `image_tags` parameter. The new format is `user/app:tag1`.  Multiple tags can now be specified for an image, separated by commas.
