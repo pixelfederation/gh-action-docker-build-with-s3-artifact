@@ -6,12 +6,9 @@ inputs:
     required: true
     description: 'AWS S3 region of artifact'
     default: 'eu-west-1'
-  image_name:
+  image_tags:
     required: true
-    description: 'Name of the image'
-  image_tag:
-    required: true
-    description: 'Tag of the image'
+    description: 'List of tags'
   buildx_driver_opts:
     required: true
     description: 'Buildx driver-opts'
@@ -29,6 +26,12 @@ inputs:
   artifact_name_server:
     required: true
     description: 'Path to artifact file on S3 bucket.'
+  cache_from:
+    required: false
+    description: 'External cache sources.'
+  cache_to:
+    required: false
+    description: 'Cache export destinations.'
 runs:
   using: 'composite'
   steps:
@@ -60,7 +63,10 @@ runs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: ${{ inputs.image_name }}:${{ inputs.image_tag }}
+        tags: ${{ inputs.image_tags }}
         file: ${{ inputs.context }}/${{ inputs.dockerfile }}
         builder: ${{ steps.buildx.outputs.name }}
         context: ${{ inputs.context }}
+        cache-from: ${{ inputs.cache_from }}
+        cache-to: ${{ inputs.cache_to }}
+
